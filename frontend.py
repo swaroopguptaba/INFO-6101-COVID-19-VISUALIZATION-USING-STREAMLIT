@@ -94,7 +94,7 @@ def show_map(data,stat,region=None,date=None):
     json_geo = pd.read_json(src_geo)
     df = pd.DataFrame()
 
-    # Custom color scale (colorbrewer2.org -> Sequential Single-Hue)
+    # Custom color scale for the map
     breaks = [.0, .2, .4, .6, .8, 1]
     color_range = [
         # 6-class Blues
@@ -125,7 +125,7 @@ def show_map(data,stat,region=None,date=None):
             return val
 
 
-    # Parse the geometry out in Pandas
+    # Parse the geometry out in Pandas to get the exact location of the state
     df["coordinates"] = json_geo["features"].apply(lambda row: row["geometry"]["coordinates"])
     df["name"] = json_geo["features"].apply(lambda row: row["properties"]["name"])
     df["adm0_a3"] = json_geo["features"].apply(lambda row: row["properties"]["adm0_a3"])
